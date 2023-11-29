@@ -1,0 +1,22 @@
+.canvas {
+	width: 440px;
+	height: 440px;
+	border: solid 1px black;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(8, 1fr);
+	column-gap: 5px;
+	row-gap: 5px;
+	background-color: cornflowerblue;
+}
+
+.tile {
+	border: solid 1px black;
+	background-color: white;
+}
+
+.tile:hover {
+	scale: 1.1;
+	box-shadow: 1.5px 1.5px 3px #486aa7, -1.5px 1.5px 3px #486aa7, -1.5px -1.5px 3px #486aa7, 1.5px -1.5px 3px #486aa7;
+}
