@@ -1,4 +1,4 @@
-.canvas {
+.container {
 	width: 440px;
 	height: 440px;
 	border: solid 1px black;
@@ -9,6 +9,7 @@
 	column-gap: 5px;
 	row-gap: 5px;
 	background-color: cornflowerblue;
+	touch-action: none;
 }
 
 .tile {
