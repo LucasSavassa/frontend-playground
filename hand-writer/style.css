@@ -1,20 +1,20 @@
 .container {
-	width: 440px;
-	height: 440px;
-	border: solid 1px black;
-	padding: 20px;
+	width: 518px;
+	height: 518px;
+	padding: 9px;
 	display: grid;
-	grid-template-columns: repeat(8, 1fr);
-	grid-template-rows: repeat(8, 1fr);
-	column-gap: 5px;
-	row-gap: 5px;
-	background-color: cornflowerblue;
+	grid-template-columns: repeat(10, 1fr);
+	grid-template-rows: repeat(10, 1fr);
+	column-gap: 3px;
+	row-gap: 3px;
+	background-color: #4000EB;
+	border-radius: 5px;
 	touch-action: none;
 }
 
 .tile {
-	border: solid 1px black;
 	background-color: white;
+	border-radius: 2px;
 }
 
 .tile:hover {
