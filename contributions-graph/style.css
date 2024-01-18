@@ -1,0 +1,27 @@
+body {
+	font-family: Helvetica;
+}
+
+.inspecao {
+	width: 35px;
+	height: 35px;
+	border-radius: 5px;
+	background: #e6e6e6;
+}
+
+.concluida {
+	background: #149200;
+}
+
+.esquecida {
+	outline: #bababa solid 1px;
+	background: white;
+}
+
+.agendada {
+	background: #d1e9cd
+}
+
+.para-mim {
+	background: #aeccf0
+}
