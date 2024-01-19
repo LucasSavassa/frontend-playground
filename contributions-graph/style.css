@@ -2,6 +2,14 @@ body {
 	font-family: Helvetica;
 }
 
+.contribution-graph {
+	border-spacing: 10px 5px;
+}
+
+.row-header {
+	width: 100px;
+}
+
 .inspecao {
 	width: 35px;
 	height: 35px;
