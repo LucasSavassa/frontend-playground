@@ -2,19 +2,19 @@ body {
 	font-family: Helvetica;
 }
 
-.contribution-graph {
-	border-spacing: 10px 5px;
-}
-
 .row-header {
 	width: 100px;
 }
 
+.contribution-graph td {
+	padding: 6px;
+}
+
 .inspecao {
-	width: 35px;
-	height: 35px;
+	width: 40px;
+	height: 40px;
 	border-radius: 5px;
-	background: #e6e6e6;
+	background: #E6E6E6;
 }
 
 .concluida {
@@ -22,14 +22,18 @@ body {
 }
 
 .esquecida {
-	outline: #bababa solid 1px;
+	outline: #BABABA solid 1px;
 	background: white;
 }
 
 .agendada {
-	background: #d1e9cd
+	background: #D1E9CD
 }
 
 .para-mim {
-	background: #aeccf0
+	background: #AECCF0
+}
+
+.mes-atual {
+	background: #EEEEEE;
 }
