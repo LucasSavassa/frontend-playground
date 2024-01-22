@@ -7,7 +7,7 @@ body {
 }
 
 .contribution-graph td {
-	padding: 6px;
+	padding: 5px;
 }
 
 .inspecao {
@@ -35,5 +35,5 @@ body {
 }
 
 .mes-atual {
-	background: #EEEEEE;
+	background: #EDEDED;
 }
