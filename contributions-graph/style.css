@@ -4,6 +4,12 @@ body {
 
 .row-header {
 	width: 100px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.row-header.eu {
+	color: #AECCF0;
 }
 
 td {
@@ -30,11 +36,11 @@ td {
 }
 
 .agendada {
-	background: #D1E9CD
+	background: #D1E9CD;
 }
 
 .agendada.para-mim {
-	background: #AECCF0
+	background: #AECCF0;
 }
 
 .mes-atual {
