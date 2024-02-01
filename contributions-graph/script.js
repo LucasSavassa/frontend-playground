@@ -71,6 +71,18 @@ class AgendaIndividual {
 	constructor(name, me) {
 		this.#name = name;
 		this.#me = me;
+		this.#jan = new Inspecao(1, 0, false, false, this.#me, this.#name, 'jan');
+		this.#fev = new Inspecao(1, 0, false, false, this.#me, this.#name, 'fev');
+		this.#mar = new Inspecao(1, 0, false, false, this.#me, this.#name, 'mar');
+		this.#abr = new Inspecao(1, 0, false, false, this.#me, this.#name, 'abr');
+		this.#mai = new Inspecao(1, 0, false, false, this.#me, this.#name, 'mai');
+		this.#jun = new Inspecao(1, 0, false, false, this.#me, this.#name, 'jun');
+		this.#jul = new Inspecao(1, 0, false, false, this.#me, this.#name, 'jul');
+		this.#ago = new Inspecao(1, 0, false, false, this.#me, this.#name, 'ago');
+		this.#set = new Inspecao(1, 0, false, false, this.#me, this.#name, 'set');
+		this.#out = new Inspecao(1, 0, false, false, this.#me, this.#name, 'out');
+		this.#nov = new Inspecao(1, 0, false, false, this.#me, this.#name, 'nov');
+		this.#dez = new Inspecao(1, 0, false, false, this.#me, this.#name, 'dez');
 	}
 	
 	updateMonth(month, inspecao) {
@@ -95,38 +107,103 @@ class AgendaIndividual {
 	
 	getElement() {			
 		const row = document.createElement('tr');
-		row.id = name.toLowerCase().trim();
+		row.id = this.#name.toLowerCase().trim();
 		
 		const firstCell = document.createElement('td');
 		firstCell.classList.add('row-header');
 		if (this.#me) firstCell.classList.add('eu');		
-		firstCell.innerText = name;
-		
-		firstCell.appendChild(this.#jan.getElement());
-		firstCell.appendChild(this.#fev.getElement());
-		firstCell.appendChild(this.#mar.getElement());
-		firstCell.appendChild(this.#abr.getElement());
-		firstCell.appendChild(this.#mai.getElement());
-		firstCell.appendChild(this.#jun.getElement());
-		firstCell.appendChild(this.#jul.getElement());
-		firstCell.appendChild(this.#ago.getElement());
-		firstCell.appendChild(this.#set.getElement());
-		firstCell.appendChild(this.#out.getElement());
-		firstCell.appendChild(this.#nov.getElement());
-		firstCell.appendChild(this.#dez.getElement());
+		firstCell.innerText = this.#name;
 		row.appendChild(firstCell);
+		
+		if(this.#jan) {
+			const janCell = document.createElement('td');
+			const inspecao = this.#jan.getElement();
+			janCell.appendChild(inspecao);
+			row.appendChild(janCell);
+		}
+		if(this.#fev) {
+			const fevCell = document.createElement('td');
+			const inspecao = this.#fev.getElement();
+			fevCell.appendChild(inspecao);
+			row.appendChild(fevCell);
+		}
+		if(this.#mar) {
+			const marCell = document.createElement('td');
+			const inspecao = this.#mar.getElement();
+			marCell.appendChild(inspecao);
+			row.appendChild(marCell);
+		}
+		if(this.#abr) {
+			const abrCell = document.createElement('td');
+			const inspecao = this.#abr.getElement();
+			abrCell.appendChild(inspecao);
+			row.appendChild(abrCell);
+		}
+		if(this.#mai) {
+			const maiCell = document.createElement('td');
+			const inspecao = this.#mai.getElement();
+			maiCell.appendChild(inspecao);
+			row.appendChild(maiCell);
+		}
+		if(this.#jun) {
+			const junCell = document.createElement('td');
+			const inspecao = this.#jun.getElement();
+			junCell.appendChild(inspecao);
+			row.appendChild(junCell);
+		}
+		if(this.#jul) {
+			const julCell = document.createElement('td');
+			const inspecao = this.#jul.getElement();
+			julCell.appendChild(inspecao);
+			row.appendChild(julCell);
+		}
+		if(this.#ago) {
+			const agoCell = document.createElement('td');
+			const inspecao = this.#ago.getElement();
+			agoCell.appendChild(inspecao);
+			row.appendChild(agoCell);
+		}
+		if(this.#set) {
+			const setCell = document.createElement('td');
+			const inspecao = this.#set.getElement();
+			setCell.appendChild(inspecao);
+			row.appendChild(setCell);
+		}
+		if(this.#out) {
+			const outCell = document.createElement('td');
+			const inspecao = this.#out.getElement();
+			outCell.appendChild(inspecao);
+			row.appendChild(outCell);
+		}
+		if(this.#nov) {
+			const novCell = document.createElement('td');
+			const inspecao = this.#nov.getElement();
+			novCell.appendChild(inspecao);
+			row.appendChild(novCell);
+		}
+		if(this.#dez) {
+			const dezCell = document.createElement('td');
+			const inspecao = this.#dez.getElement();
+			dezCell.appendChild(inspecao);
+			row.appendChild(dezCell);
+		}
 		
 		return row;
 	}
 }
 
 class Agenda {
-	constructor() {
-		
+	#agenda = {};
+	
+	constructor(myName, ...names) {		
+		for (const name of names) {
+			const me = name === myName;
+			this.#agenda[name] = new AgendaIndividual(name, me);
+		}
 	}
 	
-	update() {
-		
+	update(name, agendaIndividual) {
+		this.#agenda[name] = agendaIndividual;
 	}
 	
 	render() {
@@ -139,13 +216,19 @@ class Agenda {
 		let tableHead = this.#getTableHead();		
 		table.appendChild(tableHead);
 		
-		const tableBody = document.createElement('tbody');
+		const tableBody = this.#getTableBody();
 		table.appendChild(tableBody);
+		
+		const container = document.getElementById('contribution-graph')
+		container.appendChild(table);
 	}
 	
 	#getColGroup() {		
 		const colgroup = document.createElement('colgroup');
 		const currentMonth = new Date().getMonth()
+		
+		const emptyCol = document.createElement('col');
+		colgroup.appendChild(emptyCol);
 		
 		const colJan = document.createElement('col');
 		colJan.setAttribute('id', 'col-jan');
@@ -255,5 +338,16 @@ class Agenda {
 		tableHead.appendChild(tableHeadRow);
 
 		return tableHead;
+	}
+	
+	#getTableBody() {
+		const tableBody = document.createElement('tbody');
+		
+		for(const [key, value] of Object.entries(this.#agenda)) {
+			const tableRow = value.getElement();			
+			tableBody.appendChild(tableRow);
+		}
+		
+		return tableBody;
 	}
 }
