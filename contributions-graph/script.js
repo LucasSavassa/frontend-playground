@@ -33,9 +33,9 @@ class Inspecao {
 		inspecao.classList.add('inspecao');
 		
 		switch (this.#state) {
-			case 1: inspecao.classList.add('esquecida'); break;
-			case 2: inspecao.classList.add('agendada'); break;
-			case 3: inspecao.classList.add('realizada'); break;
+			case 1: inspecao.classList.add('agendada'); break;
+			case 2: inspecao.classList.add('realizada'); break;
+			case 3: inspecao.classList.add('esquecida'); break;
 			default: break;
 		}
 		
