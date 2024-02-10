@@ -170,11 +170,13 @@ class Handwriter extends HTMLElement {
 			tile.addEventListener('pointerdown', () => {
 				tile.style.backgroundColor = '#4000EB';
 				tile.style.border = 'solid 1px white';
+				tile.setAttribute('selected','');
 			});
 			tile.addEventListener('pointerover', () => {
 				if (pointerdown) {
 					tile.style.backgroundColor = '#4000EB';
 					tile.style.border = 'solid 1px white';
+					tile.setAttribute('selected','');
 				}
 			});
 		}
@@ -186,7 +188,20 @@ class Handwriter extends HTMLElement {
 		for (const tile of this.#tiles) {
 			tile.style.backgroundColor = 'white';
 			tile.style.border = 'unset';
+			tile.removeAttribute('selected');
 		}
+	}
+	
+	get tiles() {
+		const dataArray = [];
+		
+		for (const tile of this.#tiles) {
+			const id = tile.id;
+			const selected = (tile.getAttribute('selected') === '');
+			dataArray.push( { 'id': id, 'selected': selected } );
+		}
+		
+		return dataArray;
 	}
 }
 
