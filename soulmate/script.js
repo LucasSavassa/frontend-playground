@@ -48,22 +48,24 @@ class Vector {
 	}
 }
 
-class She {
+class Bouncer {
 	#context;
 	#vector;
 	#position;
 	#radius;
+	#color;
 	
-	constructor(context) {
+	constructor(context, vector, position, radius, color) {
 		this.#context = context;
-		this.#vector = new Vector(0,1,2);
-		this.#position = new Point(185, 200);
-		this.#radius = 15;
+		this.#vector = vector;
+		this.#position = position;
+		this.#radius = radius;
+		this.#color = color;
 	}
 	
 	draw() {
 		this.#context.beginPath();
-		this.#context.fillStyle = "rgb(247 202 201)";
+		this.#context.fillStyle = this.#color;
 		this.#context.arc(this.#position.x, this.#position.y, this.#radius, 0, 2 * Math.PI, true);
 		this.#context.fill();
 	}
@@ -112,67 +114,23 @@ class She {
 	}
 }
 
-class He {
-	#context;
-	#vector;
-	#position;
-	#radius;
-	
+class She extends Bouncer {	
 	constructor(context) {
-		this.#context = context;
-		this.#vector = new Vector(0,-1,2);
-		this.#position = new Point(215, 200);
-		this.#radius = 15;
+		const vector = new Vector(1,2,4);
+		const position = new Point(185, 200);
+		const radius = 15;
+		const color = "rgb(247, 202, 201)";
+		super(context, vector, position, radius, color);
 	}
-	
-	draw() {
-		this.#context.beginPath();
-		this.#context.fillStyle = "rgb(145 168 209)";
-		this.#context.arc(this.#position.x, this.#position.y, this.#radius, 0, 2 * Math.PI, true);
-		this.#context.fill();	
-	}
-	
-	updatePosition() {
-		this.#updateX();
-		this.#updateY();
-	}
-	
-	#updateX() {
-		if(this.#position.x > window.innerWidth - (this.#radius * 0.67))
-			this.#invertX();
-		
-		if(this.#position.x < 0 + (this.#radius * 0.67))
-			this.#invertX();
-		
-		const incrementX = this.#vector.x * this.#vector.magnitude;
-		this.#position.x += incrementX;
-	}
-	
-	#invertX() {
-		const x = this.#vector.x * -1;
-		const y = this.#vector.y;
-		const magnitude = this.#vector.magnitude;
-		
-		this.#vector = new Vector(x,y,magnitude);
-	}
-	
-	#updateY() {
-		if(this.#position.y > window.innerHeight - (this.#radius * 0.67))
-			this.#invertY();
-		
-		if(this.#position.y < 0 + (this.#radius * 0.67))
-			this.#invertY();
-		
-		const incrementY = this.#vector.y * this.#vector.magnitude;		
-		this.#position.y += incrementY;
-	}
-	
-	#invertY() {
-		const x = this.#vector.x;
-		const y = this.#vector.y * -1;
-		const magnitude = this.#vector.magnitude;
-		
-		this.#vector = new Vector(x,y,magnitude);
+}
+
+class He extends Bouncer {	
+	constructor(context) {
+		const vector = new Vector(-1,-2,4);
+		const position = new Point(215, 200);
+		const radius = 15;
+		const color = "rgb(145, 168, 209)";
+		super(context, vector, position, radius, color);
 	}
 }
 
