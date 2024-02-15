@@ -49,18 +49,23 @@ class Vector {
 }
 
 class Bouncer {
+	#mechanicalEnergy = 50;
+	#elasticWidth = 200;
+	#mass = 1;
+	
 	#context;
 	#vector;
 	#position;
 	#radius;
 	#color;
 	
-	constructor(context, vector, position, radius, color) {
+	constructor(context, radius, color) {
 		this.#context = context;
-		this.#vector = vector;
-		this.#position = position;
+		this.#vector = this.#getRandomVector();
+		this.#position = this.#getRandomPosition(context.canvas.width, context.canvas.height);
 		this.#radius = radius;
 		this.#color = color;
+		this.#mass = radius / 15;
 	}
 	
 	draw() {
@@ -75,15 +80,56 @@ class Bouncer {
 		this.#updateY();
 	}
 	
+	#getRandomVector() {
+		const randomSignX = Math.sign(Math.random() - 0.5);
+		const randomX = (Math.random() / 2 + 0.5) * randomSignX;
+
+		const randomSignY = Math.sign(Math.random() - 0.5);
+		const randomY = (Math.random() / 2 + 0.5) * randomSignY;
+
+		const magnitude = Math.sqrt(2 * this.#mechanicalEnergy / this.#mass);
+
+		return new Vector(randomX, randomY, magnitude);
+	}
+	
+	#getRandomPosition(width, height) {
+		const randomX = Math.random() * width;
+		const randomY = Math.random() * height;
+		return new Point(randomX, randomY);
+	}
+	
 	#updateX() {
-		if(this.#position.x > window.innerWidth - (this.#radius * 0.75))
-			this.#invertX();
+		let velocity = this.#vector.magnitude;
+		
+		if(this.#hitHorizontalElasticBorder()) {
+			velocity = this.#getHorizontalVelocityUnderElasticForce(velocity);
+		}
+		
+		if(this.#position.x > window.innerWidth - this.#radius) {
+			this.#invertX()
+		}
 		
 		if(this.#position.x < 0 + (this.#radius * 0.75))
 			this.#invertX();
 		
-		const incrementX = this.#vector.x * this.#vector.magnitude;
-		this.#position.x += incrementX;
+		this.#position.x += this.#vector.x * velocity;
+	}
+	
+	#hitHorizontalElasticBorder(position) {
+		return this.#position.x >= window.innerWidth - this.#radius - this.#elasticWidth;
+	}
+	
+	#getHorizontalVelocityUnderElasticForce(rawVelocity) {
+		//logistic funcion
+		const sign = Math.sign(this.#vector.x);
+		const steepness = 0.1;
+		let distance = (window.innerWidth - (this.#position.x + this.#radius)) * sign;
+		if (Math.abs(distance) < 0.1) return 0.1 * sign;
+		const denominator = 1 + Math.exp(-steepness * distance);
+		const numerator = 20;
+		const offset = -10;
+		
+		return Math.abs(numerator / denominator + offset);
 	}
 	
 	#invertX() {
@@ -95,14 +141,36 @@ class Bouncer {
 	}
 	
 	#updateY() {
+		let velocity = Math.sqrt(2 * this.#mechanicalEnergy);
+		
+		if(this.#hitVerticalElasticBorder()) {
+			velocity = this.#getVerticalVelocityUnderElasticForce(velocity);
+		}
+		
 		if(this.#position.y > window.innerHeight - (this.#radius * 0.75))
 			this.#invertY();
 		
 		if(this.#position.y < 0 + (this.#radius * 0.75))
 			this.#invertY();
 		
-		const incrementY = this.#vector.y * this.#vector.magnitude;		
-		this.#position.y += incrementY;
+		this.#position.y += this.#vector.y * velocity;
+	}
+	
+	#hitVerticalElasticBorder(position) {
+		return this.#position.y >= window.innerHeight - this.#radius - this.#elasticWidth;
+	}
+	
+	#getVerticalVelocityUnderElasticForce(rawVelocity) {
+		//logistic funcion
+		const sign = Math.sign(this.#vector.y);
+		const steepness = 0.1;
+		let distance = (window.innerHeight - (this.#position.y + this.#radius)) * sign;
+		if (Math.abs(distance) < 0.1) return 0.1 * sign;
+		const denominator = 1 + Math.exp(-steepness * distance);
+		const numerator = 20;
+		const offset = -10;
+		
+		return Math.abs(numerator / denominator + offset);
 	}
 	
 	#invertY() {
@@ -116,21 +184,17 @@ class Bouncer {
 
 class She extends Bouncer {	
 	constructor(context) {
-		const vector = new Vector(1,2,4);
-		const position = new Point(185, 200);
 		const radius = 15;
 		const color = "rgb(247, 202, 201)";
-		super(context, vector, position, radius, color);
+		super(context, radius, color);
 	}
 }
 
 class He extends Bouncer {	
 	constructor(context) {
-		const vector = new Vector(-1,-2,4);
-		const position = new Point(215, 200);
-		const radius = 15;
+		const radius = 30;
 		const color = "rgb(145, 168, 209)";
-		super(context, vector, position, radius, color);
+		super(context, radius, color);
 	}
 }
 
