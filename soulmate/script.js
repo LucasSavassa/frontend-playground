@@ -116,20 +116,21 @@ class Bouncer {
 	}
 	
 	#hitHorizontalElasticBorder(position) {
-		return this.#position.x >= window.innerWidth - this.#radius - this.#elasticWidth;
+		const hitLowerBorder = this.#position.x <= this.#elasticWidth + this.#radius;
+		const hitUpperBorder = this.#position.x >= window.innerWidth - this.#elasticWidth - this.#radius;
+		
+		return (hitLowerBorder || hitUpperBorder);
 	}
 	
 	#getHorizontalVelocityUnderElasticForce(rawVelocity) {
-		//logistic funcion
-		const sign = Math.sign(this.#vector.x);
-		const steepness = 0.1;
-		let distance = (window.innerWidth - (this.#position.x + this.#radius)) * sign;
-		if (Math.abs(distance) < 0.1) return 0.1 * sign;
-		const denominator = 1 + Math.exp(-steepness * distance);
-		const numerator = 20;
-		const offset = -10;
+		let distance = (window.innerWidth - (this.#position.x + this.#radius));
 		
-		return Math.abs(numerator / denominator + offset);
+		if (distance <= this.#elasticWidth && distance > 100)
+			return this.#vector.magnitude * 0.5;
+		if (distance <= 100 && distance > 40)
+			return this.#vector.magnitude * 0.3;
+		if (distance <= 40)
+			return this.#vector.magnitude * 0.2;		
 	}
 	
 	#invertX() {
@@ -157,20 +158,21 @@ class Bouncer {
 	}
 	
 	#hitVerticalElasticBorder(position) {
-		return this.#position.y >= window.innerHeight - this.#radius - this.#elasticWidth;
+		const hitLowerBorder = this.#position.y <= this.#elasticWidth + this.#radius;
+		const hitUpperBorder = this.#position.y >= window.innerHeight - this.#elasticWidth - this.#radius;
+		
+		return (hitLowerBorder || hitUpperBorder);
 	}
 	
 	#getVerticalVelocityUnderElasticForce(rawVelocity) {
-		//logistic funcion
-		const sign = Math.sign(this.#vector.y);
-		const steepness = 0.1;
-		let distance = (window.innerHeight - (this.#position.y + this.#radius)) * sign;
-		if (Math.abs(distance) < 0.1) return 0.1 * sign;
-		const denominator = 1 + Math.exp(-steepness * distance);
-		const numerator = 20;
-		const offset = -10;
+		let distance = (window.innerHeight - (this.#position.y + this.#radius));
 		
-		return Math.abs(numerator / denominator + offset);
+		if (distance <= this.#elasticWidth && distance > 100)
+			return this.#vector.magnitude * 0.5;
+		if (distance <= 100 && distance > 40)
+			return this.#vector.magnitude * 0.3;
+		if (distance <= 40)
+			return this.#vector.magnitude * 0.2;		
 	}
 	
 	#invertY() {
