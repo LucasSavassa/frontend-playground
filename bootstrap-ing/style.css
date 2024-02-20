@@ -1,0 +1,16 @@
+.box {
+	height: 160px;
+	width: 200px;
+	padding: 10px;
+	border: 2px solid black;
+}
+
+.one {
+	box-sizing: content-box;
+	background-color: #f00;
+}
+
+.two {
+	box-sizing: border-box;
+	background-color: #0f0;
+}
