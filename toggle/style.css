@@ -3,11 +3,6 @@
 	align-items: center;
 	gap: 5px;
 	width:215px;
-	text-align: end;
-}
-.toggle:has(#switch[checked]) {
-	flex-direction: row-reverse;
-	text-align: start;
 }
 
 .toggle label {
@@ -21,7 +16,7 @@
 .toggle > #switch {
 	display: inline-flex;
 	height: 30px;
-	width: 49px;
+	width: 66px;
 	border: 1px solid black;
 	border-radius: 20px;
 	align-items: center;
@@ -47,10 +42,22 @@
 	transition: 200ms;
 }
 
-.toggle > #switch[checked] {
-	background: #005cc8;
+.toggle > #switch[state='-1'] {
+	background: #f7cac9;
 }
 
-.toggle > #switch[checked] .button {
-	transform: translate(22px, 0px);
+.toggle > #switch[state='0'] {
+	background: white;
+}
+
+.toggle > #switch[state='0'] .button {
+	transform: translate(20px, 0px);
+}
+
+.toggle > #switch[state='1'] {
+	background: #92a8d1;
+}
+
+.toggle > #switch[state='1'] .button {
+	transform: translate(40px, 0px);
 }
