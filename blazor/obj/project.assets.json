@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Project\\GitHub\\frontend-playground\\blazor\\blazor.csproj",
+      "projectUniqueName": "C:\\Project\\GitHub\\frontend-playground\\blazor\\blazor.csproj",
       "projectName": "blazor",
-      "projectPath": "c:\\Project\\GitHub\\frontend-playground\\blazor\\blazor.csproj",
+      "projectPath": "C:\\Project\\GitHub\\frontend-playground\\blazor\\blazor.csproj",
       "packagesPath": "C:\\Users\\C839710\\.nuget\\packages\\",
-      "outputPath": "c:\\Project\\GitHub\\frontend-playground\\blazor\\obj\\",
+      "outputPath": "C:\\Project\\GitHub\\frontend-playground\\blazor\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -51,7 +51,7 @@
         "auditLevel": "low",
         "auditMode": "direct"
       },
-      "SdkAnalysisLevel": "9.0.200"
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net9.0": {
@@ -75,7 +75,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
